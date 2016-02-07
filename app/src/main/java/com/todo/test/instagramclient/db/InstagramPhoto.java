@@ -11,6 +11,15 @@ public class InstagramPhoto {
     private int imageHeight;
     private long likesCount;
     private String profilePic;
+    private long picTime;
+
+    public long getPicTime() {
+        return picTime;
+    }
+
+    public void setPicTime(long picTime) {
+        this.picTime = picTime;
+    }
 
     public String getUserName() {
         return userName;

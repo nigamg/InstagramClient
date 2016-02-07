@@ -68,6 +68,9 @@ public class InstagramActivity extends AppCompatActivity {
                                 if(photoJson.getJSONObject("caption").getString("text") != null){
                                     photo.setCaption(photoJson.getJSONObject("caption").getString("text"));
                                 }
+                                if(photoJson.getLong("created_time") != 0){
+                                    photo.setPicTime(photoJson.getLong("created_time"));
+                                }
                                 if(photoJson.getJSONObject("images").getJSONObject("standard_resolution") != null && photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url") != null){
                                     photo.setImageUrl(photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url"));
                                     photo.setImageHeight(photoJson.getJSONObject("images").getJSONObject("standard_resolution").getInt("height"));
