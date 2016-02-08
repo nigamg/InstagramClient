@@ -1,5 +1,6 @@
 package com.todo.test.instagramclient;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,10 +26,32 @@ public class InstagramActivity extends AppCompatActivity {
 
     private InstagramPhotoAdapter instagramPhotoAdapter;
 
+    private SwipeRefreshLayout swipeContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instagram);
+
+        // Lookup the swipe container view
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchInstagramFeeds();
+            }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         instagramPhotos = new ArrayList<>();
 
@@ -61,8 +84,12 @@ public class InstagramActivity extends AppCompatActivity {
                                 if(photoJson.getJSONObject("user").getString("username") != null){
                                     photo.setUserName(photoJson.getJSONObject("user").getString("username"));
                                 }
-                                if(photoJson.getJSONObject("user").getString("profile_picture") != null ){
-                                    photo.setProfilePic(photoJson.getJSONObject("user").getString("profile_picture"));
+                                try{
+                                    if(photoJson.getJSONObject("user") != null && photoJson.getJSONObject("user").getString("profile_picture") != null ){
+                                        photo.setProfilePic(photoJson.getJSONObject("user").getString("profile_picture"));
+                                    }
+                                }catch (Exception e){
+                                    //// TODO: 2/7/16  
                                 }
 
                                 if(photoJson.getJSONObject("caption").getString("text") != null){
@@ -70,6 +97,20 @@ public class InstagramActivity extends AppCompatActivity {
                                 }
                                 if(photoJson.getLong("created_time") != 0){
                                     photo.setPicTime(photoJson.getLong("created_time"));
+                                }
+                                if(photoJson.getJSONObject("comments") != null){
+                                    try{
+                                        JSONArray data = photoJson.getJSONObject("comments").getJSONArray("data");
+                                        if(data != null){
+                                            photo.setNumberOfComments(data.length());
+                                            JSONObject j = (JSONObject) data.get(0);
+                                            Log.i("DEBUG", "---comments--"+j.getString("text"));
+                                        }else{
+                                            photo.setNumberOfComments(0);
+                                        }
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }
                                 if(photoJson.getJSONObject("images").getJSONObject("standard_resolution") != null && photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url") != null){
                                     photo.setImageUrl(photoJson.getJSONObject("images").getJSONObject("standard_resolution").getString("url"));
@@ -80,6 +121,9 @@ public class InstagramActivity extends AppCompatActivity {
                                     photo.setLikesCount(photoJson.getJSONObject("likes").getInt("count"));
                                 }
                                 instagramPhotos.add(photo);
+
+                                // now let swipe container know, refresh is finished
+                                swipeContainer.setRefreshing(false);
                             }
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -88,7 +132,7 @@ public class InstagramActivity extends AppCompatActivity {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
-                //callback here for datachange
+                //callback here for data-change
                 instagramPhotoAdapter.notifyDataSetChanged();
             }
 

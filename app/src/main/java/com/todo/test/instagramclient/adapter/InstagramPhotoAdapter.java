@@ -1,7 +1,7 @@
 package com.todo.test.instagramclient.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 import com.todo.test.instagramclient.R;
 import com.todo.test.instagramclient.db.InstagramPhoto;
 
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by workboard on 2/3/16.
@@ -47,6 +48,7 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView ivCaption = (TextView) convertView.findViewById(R.id.ivCaption);
         TextView ivLike = (TextView) convertView.findViewById(R.id.ivLike);
         TextView ivTime = (TextView) convertView.findViewById(R.id.ivTime);
+        TextView ivNoComments = (TextView) convertView.findViewById(R.id.ivNoComments);
 
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfilePic);
@@ -59,21 +61,41 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         ivTime.setText("+" + getDays(photo.getPicTime())+" days");
         ivPhoto.setImageResource(0);
 
+        if(photo.getNumberOfComments() != 0){
+            ivNoComments.setText(photo.getNumberOfComments()+" comments");
+        }else{
+            ivNoComments.setText("");
+        }
+
         Picasso.with(getContext()).load(photo.getImageUrl()).into(ivPhoto);
-        Picasso.with(getContext()).load(photo.getProfilePic()).into(ivProfile);
+
+        // load round share for profile pic
+        Transformation transformation = new RoundedTransformationBuilder()
+                .borderColor(Color.parseColor("#a9c5ac"))
+                .borderWidthDp(3)
+                .cornerRadiusDp(30)
+                .oval(false)
+                .build();
+
+        Picasso.with(getContext())
+                .load(photo.getProfilePic())
+                .fit()
+                .transform(transformation)
+                .into(ivProfile);
+
 
         // Return the completed view to render on screen
         return convertView;
     }
 
     private int getDays(long picTime){
-        Log.i("DEBUG", "+++++++++++++++"+picTime);
+        //Log.i("DEBUG", "+++++++++++++++"+picTime);
         Date picDateTime = new Date ();
         //multiply the timestampt with 1000 as java expects the time in milliseconds
         picDateTime.setTime(picTime*1000);
 
         Date currentDate = new Date ();
-        Log.i("DEBUG", "+++++++---------++++++++"+System.currentTimeMillis());
+        //Log.i("DEBUG", "+++++++---------++++++++"+System.currentTimeMillis());
         currentDate.setTime(System.currentTimeMillis());
 
         //To calculate the days difference between two dates

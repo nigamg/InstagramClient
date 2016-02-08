@@ -12,6 +12,7 @@ public class InstagramPhoto {
     private long likesCount;
     private String profilePic;
     private long picTime;
+    private int numberOfComments;
 
     public long getPicTime() {
         return picTime;
@@ -67,6 +68,13 @@ public class InstagramPhoto {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+    public int getNumberOfComments() {
+        return numberOfComments;
+    }
+
+    public void setNumberOfComments(int numberOfComments) {
+        this.numberOfComments = numberOfComments;
     }
 
 }

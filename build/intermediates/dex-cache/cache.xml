@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/instantRunSlicer/debug/jars/1/5/main_slice.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c13957e89ed2727524312a37662849075dc35d31">
+        <dex dex="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/dex/debug/folders/1000/5/main_slice_d1b6a939ab530d21e8d56338109d25f1a4758071/classes.dex" />
+    </item>
+    <item
+        jar="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/instantRunSlicer/debug/jars/1/1a/dependencies.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8e5b2702488b2efedb2f91e52233795e20856e25">
+        <dex dex="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/dex/debug/folders/1000/1a/dependencies_cc65e0734f5b8b74371f57b546ee4cc77b1b34e6/classes.dex" />
+    </item>
+
+</items>
