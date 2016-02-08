@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -18,9 +19,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
 
 public class InstagramActivity extends AppCompatActivity {
+
+    @Bind(R.id.lvMovies)
+    ListView lvPhotos;
 
     private static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
     private ArrayList<InstagramPhoto> instagramPhotos;
@@ -58,7 +64,8 @@ public class InstagramActivity extends AppCompatActivity {
 
         instagramPhotoAdapter = new InstagramPhotoAdapter(this, instagramPhotos);
 
-        ListView lvPhotos = (ListView) findViewById(R.id.lvMovies);
+        //lvPhotos = (ListView) findViewById(R.id.lvMovies);
+        ButterKnife.bind(this);
         lvPhotos.setAdapter(instagramPhotoAdapter);
 
         fetchInstagramFeeds();
