@@ -1,5 +1,8 @@
 package com.todo.test.instagramclient.db;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by workboard on 2/3/16.
  */
@@ -13,6 +16,7 @@ public class InstagramPhoto {
     private String profilePic;
     private long picTime;
     private int numberOfComments;
+    private ArrayList<String> comments;
 
     public long getPicTime() {
         return picTime;
@@ -76,5 +80,14 @@ public class InstagramPhoto {
     public void setNumberOfComments(int numberOfComments) {
         this.numberOfComments = numberOfComments;
     }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> comments) {
+        this.comments = comments;
+    }
+
 
 }

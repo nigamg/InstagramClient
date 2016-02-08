@@ -49,6 +49,7 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView ivLike = (TextView) convertView.findViewById(R.id.ivLike);
         TextView ivTime = (TextView) convertView.findViewById(R.id.ivTime);
         TextView ivNoComments = (TextView) convertView.findViewById(R.id.ivNoComments);
+        TextView ivComments = (TextView) convertView.findViewById(R.id.ivComments);
 
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         ImageView ivProfile = (ImageView) convertView.findViewById(R.id.ivProfilePic);
@@ -59,7 +60,12 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         ivCaption.setText(photo.getCaption());
         ivLike.setText(likeImg+space+String.valueOf(photo.getLikesCount()) + likesText);
         ivTime.setText("+" + getDays(photo.getPicTime())+" days");
-        ivPhoto.setImageResource(0);
+
+        if(photo.getComments() != null){
+            ivComments.setText(photo.getComments().get(0)+": "+photo.getComments().get(1));
+        }else{
+            ivComments.setText("");
+        }
 
         if(photo.getNumberOfComments() != 0){
             ivNoComments.setText(photo.getNumberOfComments()+" comments");
@@ -67,11 +73,12 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
             ivNoComments.setText("");
         }
 
+        ivPhoto.setImageResource(0);
         Picasso.with(getContext()).load(photo.getImageUrl()).into(ivPhoto);
 
         // load round share for profile pic
         Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.parseColor("#a9c5ac"))
+                .borderColor(Color.BLUE) // parseColor("#a9c5ac")
                 .borderWidthDp(3)
                 .cornerRadiusDp(30)
                 .oval(false)

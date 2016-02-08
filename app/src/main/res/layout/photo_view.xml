@@ -28,7 +28,7 @@
         android:minHeight="20dp"
         android:maxLines="1"
         android:maxWidth="550dp"
-        android:paddingLeft="5dp"
+        android:paddingLeft="2dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/ivPhoto"
         android:layout_alignRight="@+id/ivNoComments"
@@ -65,6 +65,7 @@
         android:layout_height="40dp"
         android:id="@+id/ivProfilePic"
         android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="10dp"
         android:scaleType="fitCenter"
         app:riv_corner_radius="30dip"
         app:riv_border_width="2dip"
@@ -99,5 +100,17 @@
         android:layout_below="@+id/ivPhoto"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="comments"
+        android:id="@+id/ivComments"
+        android:ellipsize="end"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:layout_below="@+id/ivUser"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

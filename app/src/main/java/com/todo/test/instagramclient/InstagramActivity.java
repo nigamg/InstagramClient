@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -89,7 +90,7 @@ public class InstagramActivity extends AppCompatActivity {
                                         photo.setProfilePic(photoJson.getJSONObject("user").getString("profile_picture"));
                                     }
                                 }catch (Exception e){
-                                    //// TODO: 2/7/16  
+                                    //// TODO: 2/7/16
                                 }
 
                                 if(photoJson.getJSONObject("caption").getString("text") != null){
@@ -105,6 +106,13 @@ public class InstagramActivity extends AppCompatActivity {
                                             photo.setNumberOfComments(data.length());
                                             JSONObject j = (JSONObject) data.get(0);
                                             Log.i("DEBUG", "---comments--"+j.getString("text"));
+                                            if(j.getJSONObject("from") != null){
+                                                // set comments
+                                                ArrayList<String> comments = new ArrayList<String>();
+                                                comments.add(j.getJSONObject("from").getString("username"));
+                                                comments.add(j.getString("text"));
+                                                photo.setComments(comments);
+                                            }
                                         }else{
                                             photo.setNumberOfComments(0);
                                         }
