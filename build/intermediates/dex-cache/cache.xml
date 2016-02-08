@@ -5,14 +5,14 @@
         jar="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/instantRunSlicer/debug/jars/1/5/main_slice.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="a75bd2c4a8fa3c2218c96685933bd4638fabccb3">
+        sha1="a1cdbc20810282e2750deda9a6f3d74b8ec71c4a">
         <dex dex="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/dex/debug/folders/1000/5/main_slice_d1b6a939ab530d21e8d56338109d25f1a4758071/classes.dex" />
     </item>
     <item
         jar="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/instantRunSlicer/debug/jars/1/1a/dependencies.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="196b46fee2fe19030562d36213b5aad1e13e6e4f">
+        sha1="b0f2bc8dfcf592bed914057138630be96b8aadca">
         <dex dex="/Users/workboard/AndroidStudioProjects/InstagramClient/app/build/intermediates/transforms/dex/debug/folders/1000/1a/dependencies_cc65e0734f5b8b74371f57b546ee4cc77b1b34e6/classes.dex" />
     </item>
 

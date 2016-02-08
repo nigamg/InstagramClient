@@ -77,10 +77,12 @@ public class InstagramPhotoAdapter extends ArrayAdapter<InstagramPhoto> {
         Picasso.with(getContext()).load(photo.getImageUrl()).into(ivPhoto);
 
         // load round share for profile pic
+        ivProfile.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         Transformation transformation = new RoundedTransformationBuilder()
-                .borderColor(Color.BLUE) // parseColor("#a9c5ac")
+                .borderColor(Color.LTGRAY) //
                 .borderWidthDp(3)
                 .cornerRadiusDp(30)
+                .scaleType(ImageView.ScaleType.CENTER)
                 .oval(false)
                 .build();
 
