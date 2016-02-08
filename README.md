@@ -10,9 +10,9 @@ Completed user stories:
     Optional: relative timestamp, like count, user profile image
     Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
     Optional: Show latest comment for each photo
+        Tip: Latest comment is dispaled as commenter_name:comment, along with total number of comments showen inlined with likes count.
     Optional: Display each user profile image using a RoundedImageView
-    Optional: Display each user profile image using a RoundedImageView
-    Optional: Display each user profile image using a RoundedImageView
+        Issue: RoundImageView are by-default showing black border, tried multiple option will no luck. 
     Option: Apply the popular Butterknife annotation library to reduce view boilerplate.
 
 
